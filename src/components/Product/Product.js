@@ -13,7 +13,7 @@ const Product = (props) => {
                     {props.product_description}
                 </p>
                 <p className="product-price">{props.product_price}</p>
-                <li className="product-addcart">Add to cart</li>
+                <li className="product-addcart" onClick={props.handler} value={props.id}>Add to cart</li>
             </div>
         </div>
     );
