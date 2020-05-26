@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Route } from "react-router-dom";
+import Cart from "./components/Cart/Cart";
 
 class App extends Component {
     linkList = [
@@ -56,7 +57,7 @@ class App extends Component {
                 this.setState({
                     cart: [...prevCart, resData],
                 });
-                console.log(this.state.cart);
+                // console.log(this.state.cart);
             })
             .catch((err) => {});
     };
@@ -99,6 +100,13 @@ class App extends Component {
                             );
                         }}
                     />
+                    <Route path="/cart" exact render={
+                        () => {
+                            return(
+                                <Cart cartlist={this.state.cart} />
+                            );
+                        }
+                    }/>
                 </div>
             </BrowserRouter>
         );
