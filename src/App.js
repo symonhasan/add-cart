@@ -23,6 +23,7 @@ class App extends Component {
     state = {
         productList: [],
         cart: [],
+        totalAmount: 0
     };
 
     UNSAFE_componentWillMount() {
@@ -56,6 +57,10 @@ class App extends Component {
                 const prevCart = this.state.cart;
                 this.setState({
                     cart: [...prevCart, resData],
+                });
+                const prevTotal = this.state.totalAmount
+                this.setState({
+                    totalAmount: prevTotal + resData.price
                 });
                 // console.log(this.state.cart);
             })
@@ -103,7 +108,7 @@ class App extends Component {
                     <Route path="/cart" exact render={
                         () => {
                             return(
-                                <Cart cartlist={this.state.cart} />
+                                <Cart cartlist={this.state.cart} total={this.state.totalAmount} />
                             );
                         }
                     }/>
