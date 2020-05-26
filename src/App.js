@@ -87,6 +87,13 @@ class App extends Component {
         });
     };
 
+    emptyCart = () => {
+        this.setState({
+            cart: [],
+            totalAmount: 0
+        })
+    } 
+
     deleteCartProduct = (e) => {
         const index = e.target.value;
         const cartList = this.state.cart;
@@ -133,6 +140,7 @@ class App extends Component {
                                     total={this.state.totalAmount}
                                     del={this.deleteCartProduct}
                                     place={this.placeOrder}
+                                    emptycart={this.emptyCart}
                                 />
                             );
                         }}

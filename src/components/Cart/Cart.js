@@ -80,7 +80,7 @@ const Cart = (props) => {
         <div className="cart">
             <div className="top">
                 <h3>Your Cart</h3>
-                <li>Reset</li>
+                <li onClick={props.emptycart}>Reset</li>
             </div>
             {props.cartlist.length ? renderCart( props ) : renderCartEmpty()}
         </div>
