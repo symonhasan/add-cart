@@ -1,0 +1,25 @@
+.nav-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FF6D00;
+}
+.site-title{
+    color: #FBE9E7;
+}
+.navlinks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.nav-link{
+    list-style: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    cursor: pointer;
+}
+.nav-link:hover{
+    color: #33691E;
+}
