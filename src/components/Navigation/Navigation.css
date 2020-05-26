@@ -3,9 +3,8 @@
     align-items: center;
     justify-content: space-evenly;
     background-color: #FF6D00;
-}
-.site-title{
-    color: #FBE9E7;
+    padding-top: 10px;
+    padding-bottom: 10px ;
 }
 .navlinks{
     display: flex;
@@ -13,13 +12,15 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-.nav-link{
+.nav-link a{
     list-style: none;
+    text-decoration: none;
     padding-left: 10px;
     padding-right: 10px;
     color: white;
     cursor: pointer;
 }
-.nav-link:hover{
+.nav-link a:hover{
     color: #33691E;
+    text-decoration: none;
 }

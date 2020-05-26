@@ -4,20 +4,24 @@ import Navigation from "./components/Navigation/Navigation";
 import Product from "./components/Product/Product";
 import { Container, Row, Col } from "react-bootstrap";
 import "./bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 class App extends Component {
     linkList = [
         {
-            title: "Github",
+            title: "Products",
+            route: "/"
         },
         {
             title: "Cart",
-        },
+            route: "/cart"
+        }
     ];
 
     state = {
-        productList: []
-    }
+        productList: [],
+    };
 
     componentWillMount() {
         fetch("http://localhost:8080/")
@@ -25,15 +29,13 @@ class App extends Component {
                 return res.json();
             })
             .then((resData) => {
-                this.setState(
-                    {
-                        productList: [...resData]
-                    }
-                )
+                this.setState({
+                    productList: [...resData],
+                });
             })
             .catch((err) => {});
     }
-    
+
     renderProduct = () => {
         return this.state.productList.map((product, index) => {
             return (
@@ -50,18 +52,26 @@ class App extends Component {
                 </Col>
             );
         });
-    }
+    };
 
     render() {
         return (
-            <div className="App">
-                <Navigation title="Add To Cart" links={this.linkList} />
-                <Container>
-                    <Row>
-                        {this.renderProduct()}
-                    </Row>
-                </Container>
-            </div>
+            <BrowserRouter>
+                <div className="App">
+                    <Navigation title="Add To Cart" links={this.linkList} />
+
+                    <Route
+                        path="/" exact
+                        render={() => {
+                            return (
+                                <Container>
+                                    <Row>{this.renderProduct()}</Row>
+                                </Container>
+                            );
+                        }}
+                    />
+                </div>
+            </BrowserRouter>
         );
     }
 }
