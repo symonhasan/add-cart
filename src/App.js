@@ -23,7 +23,7 @@ class App extends Component {
     state = {
         productList: [],
         cart: [],
-        totalAmount: 0
+        totalAmount: 0,
     };
 
     UNSAFE_componentWillMount() {
@@ -58,9 +58,9 @@ class App extends Component {
                 this.setState({
                     cart: [...prevCart, resData],
                 });
-                const prevTotal = this.state.totalAmount
+                const prevTotal = this.state.totalAmount;
                 this.setState({
-                    totalAmount: prevTotal + resData.price
+                    totalAmount: prevTotal + resData.price,
                 });
                 // console.log(this.state.cart);
             })
@@ -87,6 +87,24 @@ class App extends Component {
         });
     };
 
+    deleteCartProduct = (e) => {
+        const index = e.target.value;
+        const cartList = this.state.cart;
+        let amount = cartList[ index ].price;
+        // console.log( amount );
+        const currentTotal = this.state.totalAmount;
+        cartList.splice( index , 1);
+        this.setState({
+            cart: [...cartList],
+            totalAmount: currentTotal - amount
+        }
+        )
+    }
+
+    placeOrder = () => {
+
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -105,13 +123,20 @@ class App extends Component {
                             );
                         }}
                     />
-                    <Route path="/cart" exact render={
-                        () => {
-                            return(
-                                <Cart cartlist={this.state.cart} total={this.state.totalAmount} />
+                    <Route
+                        path="/cart"
+                        exact
+                        render={() => {
+                            return (
+                                <Cart
+                                    cartlist={this.state.cart}
+                                    total={this.state.totalAmount}
+                                    del={this.deleteCartProduct}
+                                    place={this.placeOrder}
+                                />
                             );
-                        }
-                    }/>
+                        }}
+                    />
                 </div>
             </BrowserRouter>
         );

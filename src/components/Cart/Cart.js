@@ -26,7 +26,7 @@ const CartRow = (props) => {
                     <p>{product.price}</p>
                 </div>
                 <div>
-                    <button>Delete</button>
+                    <button value={index} onClick={props.del}>Delete</button>
                 </div>
             </div>
         );
@@ -57,7 +57,7 @@ const renderCart = ( props) => {
                         <p>Action</p>
                     </div>
                 </div>
-                <CartRow cartlist={props.cartlist} />
+                <CartRow cartlist={props.cartlist} del={props.del} />
             </div>
             <div className="total">
                 <h5>Total Amount To Be Paid </h5>
