@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
 import Product from "./components/Product/Product";
 import { Container, Row, Col } from "react-bootstrap";
-import './bootstrap.min.css';
+import "./bootstrap.min.css";
 
-function App() {
-    const linkList = [
+class App extends Component {
+    linkList = [
         {
             title: "Github",
         },
@@ -15,48 +15,55 @@ function App() {
         },
     ];
 
-    return (
-        <div className="App">
-            <Navigation title="Add To Cart" links={linkList} />
-            <Container>
-                <Row>
-                    <Col sm={4} xs={6}>
-                        <div className="products">
-                            <Product
-                                imgsrc=""
-                                alt=""
-                                product_title="First Product"
-                                product_description="lorem ipsum dolar lorem is"
-                                product_price="100"
-                            />
-                        </div>
-                    </Col>
-					<Col sm={4} xs={6}>
-                        <div className="products">
-                            <Product
-                                imgsrc=""
-                                alt=""
-                                product_title="Second Product"
-                                product_description="lorem ipsum dolar lorem is"
-                                product_price="200"
-                            />
-                        </div>
-                    </Col>
-					<Col sm={4} xs={6}>
-                        <div className="products">
-                            <Product
-                                imgsrc=""
-                                alt=""
-                                product_title="Third Product"
-                                product_description="lorem ipsum dolar lorem is"
-                                product_price="300"
-                            />
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-    );
+    state = {
+        productList: []
+    }
+
+    componentWillMount() {
+        fetch("http://localhost:8080/")
+            .then((res) => {
+                return res.json();
+            })
+            .then((resData) => {
+                this.setState(
+                    {
+                        productList: [...resData]
+                    }
+                )
+            })
+            .catch((err) => {});
+    }
+    
+    renderProduct = () => {
+        return this.state.productList.map((product, index) => {
+            return (
+                <Col sm={4} xs={6} key={index}>
+                    <div className="products">
+                        <Product
+                            imgsrc={product.img}
+                            alt={product.alt}
+                            product_title={product.title}
+                            product_description={product.desc}
+                            product_price={product.price}
+                        />
+                    </div>
+                </Col>
+            );
+        });
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <Navigation title="Add To Cart" links={this.linkList} />
+                <Container>
+                    <Row>
+                        {this.renderProduct()}
+                    </Row>
+                </Container>
+            </div>
+        );
+    }
 }
 
 export default App;
