@@ -11,20 +11,20 @@ class App extends Component {
     linkList = [
         {
             title: "Products",
-            route: "/"
+            route: "/",
         },
         {
             title: "Cart",
-            route: "/cart"
-        }
+            route: "/cart",
+        },
     ];
 
     state = {
         productList: [],
-        cart: []
+        cart: [],
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         fetch("http://localhost:8080/")
             .then((res) => {
                 return res.json();
@@ -38,37 +38,33 @@ class App extends Component {
     }
 
     addCartBtnHandler = (e) => {
-        fetch("http://localhost:8080/add-cart" , {
+        fetch("http://localhost:8080/add-cart", {
             method: "POST",
             body: JSON.stringify({
-                id: e.target.value
+                id: e.target.value,
             }),
             headers: {
-                'Content-Type': 'application/json' 
-            }
+                "Content-Type": "application/json",
+            },
         })
-        .then( (res) => {
-            return res.json();
-        })
-        .then( (resData) => {
-            // console.log( resData )
-            const prevCart = this.state.cart;
-            this.setState(
-                {
-                    cart: [...prevCart , resData ]
-                }
-            )
-            console.log( this.state.cart );
-        })
-        .catch( err => {
-
-        })
-    }
+            .then((res) => {
+                return res.json();
+            })
+            .then((resData) => {
+                // console.log( resData )
+                const prevCart = this.state.cart;
+                this.setState({
+                    cart: [...prevCart, resData],
+                });
+                console.log(this.state.cart);
+            })
+            .catch((err) => {});
+    };
 
     renderProduct = () => {
         return this.state.productList.map((product, index) => {
             return (
-                <Col sm={4} xs={6} key={index}>
+                <Col sm={3} xs={6} key={index}>
                     <div className="products">
                         <Product
                             id={product.id}
@@ -92,10 +88,12 @@ class App extends Component {
                     <Navigation title="Add To Cart" links={this.linkList} />
 
                     <Route
-                        path="/" exact
+                        path="/"
+                        exact
                         render={() => {
                             return (
                                 <Container>
+                                    <h3>Products</h3>
                                     <Row>{this.renderProduct()}</Row>
                                 </Container>
                             );

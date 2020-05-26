@@ -13,10 +13,15 @@
 }
 .product-title{
     font-size: 1.2rem;
+    margin: 0;
 }
 .product-description{
     text-overflow: ellipsis;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    margin: 0;
+}
+.product-price{
+    text-align: center;
 }
 .product-addcart{
     list-style: none;
@@ -24,5 +29,8 @@
     cursor: pointer;
     padding: 10px;
     text-align: center;
-    margin: 20px;
+    border-radius: 4px;
+}
+.product-addcart:hover{
+    background-color: rgb(255, 186, 83);
 }
