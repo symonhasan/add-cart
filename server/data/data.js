@@ -32,3 +32,6 @@ exports.productInfo = [
         alt: "product4"
     },
 ]
+exports.orderList = [
+
+]

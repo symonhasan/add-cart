@@ -63,7 +63,7 @@ const renderCart = ( props) => {
                 <h5>Total Amount To Be Paid </h5>
     <h4>{props.total} TK</h4>
             </div>
-            <button className="order-btn">Place Order</button>
+            <button className="order-btn" onClick={props.orderplace}>Place Order</button>
         </div>
     );
 };

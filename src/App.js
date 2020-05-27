@@ -116,7 +116,25 @@ class App extends Component {
         });
     };
 
-    placeOrder = () => {};
+    placeOrder = () => {
+        console.log( "place order clicked");
+        fetch('http://localhost:8080/place-order' , {
+            method: 'POST',
+            body: JSON.stringify({
+                products: this.state.cart,
+                totalAmount: this.state.totalAmount,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then( res => {
+            console.log( res );
+        } )
+        .catch( err => {
+
+        })
+    };
 
     render() {
         return (
@@ -147,6 +165,7 @@ class App extends Component {
                                     del={this.deleteCartProduct}
                                     place={this.placeOrder}
                                     emptycart={this.emptyCart}
+                                    orderplace={this.placeOrder}
                                 />
                             );
                         }}

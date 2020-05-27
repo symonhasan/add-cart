@@ -14,7 +14,7 @@ exports.fetchProduct = ( req , res , next ) => {
     {
         if( Arr[ i ].id === productId )
         {
-            res.status( 201 ).json( Arr[ i ]);
+            res.status( 200 ).json( Arr[ i ]);
         }
     }
 }
