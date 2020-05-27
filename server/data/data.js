@@ -4,7 +4,7 @@ exports.productInfo = [
         title: "First Product",
         desc: "some description about first product",
         price: 100,
-        img: "https://lh3.googleusercontent.com/proxy/A0UB0T5vdTc1uV8DvxY36VqGvWrh79u1KbrmZon2UpnCo2UHyAlY03NvKs2V-6RbiX0BNKJ6oRHD-L9D2-KoUCqft2F7cmlYZGwiOw",
+        img: "https://vistapointe.net/images/product-wallpaper-8.jpg",
         alt: "product1"
     },
     {
