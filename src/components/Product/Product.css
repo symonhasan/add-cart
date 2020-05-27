@@ -34,3 +34,13 @@
 .product-addcart:hover{
     background-color: rgb(255, 186, 83);
 }
+.quantity{
+    width: 50px;
+    padding: 10px;
+}
+.bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -23,7 +23,7 @@ class App extends Component {
     state = {
         productList: [],
         cart: [],
-        totalAmount: 0,
+        totalAmount: 0
     };
 
     UNSAFE_componentWillMount() {
@@ -37,9 +37,11 @@ class App extends Component {
                 });
             })
             .catch((err) => {});
+        // console.log("Hello ", this.state.quantity);
     }
 
-    addCartBtnHandler = (e) => {
+    addCartBtnHandler = (e , quantityValue ) => {
+        
         fetch("http://localhost:8080/add-cart", {
             method: "POST",
             body: JSON.stringify({
@@ -53,22 +55,30 @@ class App extends Component {
                 return res.json();
             })
             .then((resData) => {
-                // console.log( resData )
+            
                 const prevCart = this.state.cart;
+                const newElement = {
+                    ...resData,
+                    quantity: quantityValue
+                }
                 this.setState({
-                    cart: [...prevCart, resData],
+                    cart: [...prevCart, newElement],
                 });
+
                 const prevTotal = this.state.totalAmount;
+                const newAmount = newElement.quantity * newElement.price;
+
                 this.setState({
-                    totalAmount: prevTotal + resData.price,
+                    totalAmount: prevTotal + newAmount,
                 });
-                // console.log(this.state.cart);
+                
             })
             .catch((err) => {});
     };
 
     renderProduct = () => {
         return this.state.productList.map((product, index) => {
+            // console.log( this.state.quantity );
             return (
                 <Col sm={3} xs={6} key={index}>
                     <div className="products">
@@ -90,27 +100,23 @@ class App extends Component {
     emptyCart = () => {
         this.setState({
             cart: [],
-            totalAmount: 0
-        })
-    } 
+            totalAmount: 0,
+        });
+    };
 
     deleteCartProduct = (e) => {
         const index = e.target.value;
         const cartList = this.state.cart;
-        let amount = cartList[ index ].price;
-        // console.log( amount );
+        let amount = cartList[index].price * cartList[ index ].quantity;
         const currentTotal = this.state.totalAmount;
-        cartList.splice( index , 1);
+        cartList.splice(index, 1);
         this.setState({
             cart: [...cartList],
-            totalAmount: currentTotal - amount
-        }
-        )
-    }
+            totalAmount: currentTotal - amount,
+        });
+    };
 
-    placeOrder = () => {
-
-    }
+    placeOrder = () => {};
 
     render() {
         return (

@@ -20,10 +20,10 @@ const CartRow = (props) => {
                     <p>{product.title}</p>
                 </div>
                 <div>
-                    <p>1</p>
+                    <p>{product.quantity}</p>
                 </div>
                 <div>
-                    <p>{product.price}</p>
+                    <p>{product.price * product.quantity}</p>
                 </div>
                 <div>
                     <button value={index} onClick={props.del}>Delete</button>
