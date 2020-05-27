@@ -71,6 +71,8 @@ class App extends Component {
                 this.setState({
                     totalAmount: prevTotal + newAmount,
                 });
+
+                alert("Product " + newElement.title + " Added To Cart");
                 
             })
             .catch((err) => {});
@@ -129,8 +131,12 @@ class App extends Component {
             },
         })
         .then( res => {
-            console.log( res );
+            return res.json();
         } )
+        .then( resData => {
+            alert( resData.massage );
+            this.emptyCart();
+        })
         .catch( err => {
 
         })
