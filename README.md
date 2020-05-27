@@ -14,7 +14,7 @@ You will also see any lint errors in the console.
 
 Launches the nodejs server at http://localhost:8080<br />
 
-### Rest Endpoints
+## Rest Endpoints
 
 / - GET method that fetch products information
 
@@ -22,6 +22,6 @@ Launches the nodejs server at http://localhost:8080<br />
 
 /place-order - POST method to place an order to data source
 
-### Notes
+## Notes
 
 After sucessfully placed an order the current placed order and all orders available in data source can be seen in terminal.
